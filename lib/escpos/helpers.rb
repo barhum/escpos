@@ -10,15 +10,11 @@ module Escpos
     # @param replace [String] Replacement character for invalid/undefined chars
     # @return [String] Encoded string
     def encode(data, **opts)
-      data.encode(
-        opts.fetch(:encoding, Encoding::UTF_8),  # Added default encoding
-        'UTF-8', 
-        {
-          invalid: opts.fetch(:invalid, :replace),
-          undef: opts.fetch(:undef, :replace),
-          replace: opts.fetch(:replace, '?')        
-        }
-      )
+      data.encode(opts.fetch(:encoding), 'UTF-8', {
+        invalid: opts.fetch(:invalid, :replace),
+        undefined: opts.fetch(:undefined, :replace),
+        replace: opts.fetch(:replace, '?')        
+      })
     end
 
     # Set printer encoding
