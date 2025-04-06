@@ -5,7 +5,7 @@ module Escpos
     # Encodes UTF-8 string to encoding acceptable for the printer
     # The printer must be set to that encoding
     # Available encodings can be listed in console using Encoding.constants
-    def encode(data, opts = {})
+    def encode(data, **opts)
       data.encode(opts.fetch(:encoding), 'UTF-8', {
         invalid: opts.fetch(:invalid, :replace),
         undef: opts.fetch(:undef, :replace),
