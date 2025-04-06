@@ -9,11 +9,11 @@ module Escpos
     # @param undef [Symbol] How to handle undefined characters (:replace, :ignore)
     # @param replace [String] Replacement character for invalid/undefined chars
     # @return [String] Encoded string
-    def encode(data, **opts)
-      data.encode(opts.fetch(:encoding), 'UTF-8', {
-        invalid: opts.fetch(:invalid, :replace),
-        undefined: opts.fetch(:undefined, :replace),
-        replace: opts.fetch(:replace, '?')        
+    def encode(data, encoding: nil, invalid: :replace, undef: :replace, replace: '?')
+      data.encode(encoding || Encoding::UTF_8, 'UTF-8', {
+        invalid: invalid,
+        undef: undef,
+        replace: replace
       })
     end
 
