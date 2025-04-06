@@ -9,7 +9,7 @@ module Escpos
     # @param undef [Symbol] How to handle undefined characters (:replace, :ignore)
     # @param replace [String] Replacement character for invalid/undefined chars
     # @return [String] Encoded string
-    def encode(data, encoding)
+    def encode(data, encoding:)
       data.encode(encoding)
     end
 
