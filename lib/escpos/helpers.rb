@@ -9,15 +9,16 @@ module Escpos
     # @param undef [Symbol] How to handle undefined characters (:replace, :ignore)
     # @param replace [String] Replacement character for invalid/undefined chars
     # @return [String] Encoded string
-    def encode(data, encoding:, invalid: :replace, undef: :replace, replace: '?')
-      raise ArgumentError, "data must be a String" unless data.is_a?(String)
-      raise ArgumentError, "encoding must be an Encoding" unless encoding.is_a?(Encoding)
-      
-      data.encode(encoding, 'UTF-8', {
-        invalid: invalid,
-        undef: undef,
-        replace: replace
-      })
+    def encode(data, **opts)
+      data.encode(
+        opts.fetch(:encoding, Encoding::UTF_8),  # Added default encoding
+        'UTF-8', 
+        {
+          invalid: opts.fetch(:invalid, :replace),
+          undef: opts.fetch(:undef, :replace),
+          replace: opts.fetch(:replace, '?')        
+        }
+      )
     end
 
     # Set printer encoding
